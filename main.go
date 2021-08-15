@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"regexp"
 	"unicode"
 )
 
@@ -72,12 +73,48 @@ func getTimeSeries(stat string, loc string, date string, before string, after st
 		log.Fatal("Need to provide flags for tempseries query")
 	}
 
-	// Check if location flag value is all uppercase
+	/** FLAG VALUE VALIDATION **/
+	// Check if location flag value is all uppercase and is apart of the alphabet
 	for _, i := range loc {
-		if unicode.IsLower(i) && unicode.IsLetter(i) {
-			log.Fatal("Location flag value needs to be in all uppercase.")
+		if unicode.IsLower(i) {
+			log.Fatal("'loc' flag value needs to be in all uppercase.")
+		} else if !unicode.IsLetter(i) {
+			log.Fatal("invalid value for 'loc' flag")
 		}
 	}
+
+	for _, i := range stat {
+		if !unicode.IsLetter(i) {
+			log.Fatal("invalid value for 'stat' flag")
+		}
+	}
+
+	re := regexp.MustCompile(`^\d{4}-\d{2}-\d{2}$`)
+
+	if date != "" {
+		dateResult := re.MatchString(date)
+
+		if !dateResult {
+			log.Fatal("invalid value for 'date' flag")
+		}
+	}
+
+	if before != "" {
+		beforeResult := re.MatchString(before)
+
+		if !beforeResult {
+			log.Fatal("invalid value for 'before' flag")
+		}
+	}
+
+	if after != "" {
+		afterResult := re.MatchString(after)
+
+		if !afterResult {
+			log.Fatal("invalid value for 'after' flag")
+		}
+	}
+	/** FLAG VALUE VALIDATION END **/
 
 	url := "https://api.opencovid.ca/timeseries?"
 
