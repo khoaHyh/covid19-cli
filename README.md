@@ -1,11 +1,11 @@
 ## Usage
 
-### Base command:
+#### Base command:
 ```shell
 $ ./main
 ```
 
-### Timeseries:
+#### Timeseries:
 Flags available:
 * stat
 * loc
@@ -13,9 +13,7 @@ Flags available:
 * before
 * after
 
-Usage:
-
-* timeseries
+Example:
 ```shell
 $ ./main -timeseries -stat=cases -after=2021-08-14
 ```
