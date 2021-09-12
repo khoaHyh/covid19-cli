@@ -12,17 +12,17 @@ import (
 )
 
 func main() {
-	timeSeriesPtr := flag.String("timeseries", "", "To indicate that the user requires time series data")
-	stat := flag.String("stat", "", "return data only of the specific type")
-	loc := flag.String("loc", "", "return data only from the specified province or health region")
-	date := flag.String("date", "", "return date only from the specified date")
-	before := flag.String("before", "", "return date on or after the specified date")
-	after := flag.String("after", "", "return date on or before the specified date")
+	timeSeriesPtr := flag.Bool("timeseries", false, "To indicate that the user requires time series data")
+	statPtr := flag.String("stat", "", "return data only of the specific type")
+	locPtr := flag.String("loc", "", "return data only from the specified province or health region")
+	datePtr := flag.String("date", "", "return date only from the specified date")
+	beforePtr := flag.String("before", "", "return date on or after the specified date")
+	afterPtr := flag.String("after", "", "return date on or before the specified date")
 
 	flag.Parse()
 
-	if *timeSeriesPtr != "" {
-		getTimeSeries(*stat, *loc, *date, *before, *after)
+	if *timeSeriesPtr {
+		getTimeSeries(*statPtr, *locPtr, *datePtr, *beforePtr, *afterPtr)
 		return
 	}
 
