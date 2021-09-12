@@ -1,11 +1,11 @@
-##Usage
+## Usage
 
-###Base command:
+### Base command:
 ```shell
 $ ./main
 ```
 
-###Timeseries:
+### Timeseries:
 Flags available:
 * stat
 * loc
