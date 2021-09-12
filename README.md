@@ -13,7 +13,9 @@ Flags available:
 * before
 * after
 
-Example:
+Usage:
+
+* timeseries
 ```shell
-$ ./main -timeseries=yes -stat=cases -after=2021-08-14
+$ ./main -timeseries -stat=cases -after=2021-08-14
 ```
